@@ -24,10 +24,10 @@ export default function Login() {
   //login
 
   //---- snackbar---
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState("");
 
   const handleSnackClick = () => {
-    setOpen(true);
+    // setOpen(true);
   };
 
   const handleSnackClose = (event, reason) => {
@@ -79,17 +79,22 @@ export default function Login() {
     },
     validate,
     onSubmit: async (values) => {
-      let result = await fetch(`${baseurl}/api/sm-login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      let result2 = await result.json();
-      console.log(result2);
-      localStorage.setItem(" ", JSON.stringify(result2));
+      try {
+        let result = await fetch(`${baseurl}/api/sm-login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        if (result.status === 200) {
+          let result2 = await result.json();
+          console.log(result2);
+          localStorage.setItem("res", JSON.stringify(result2));
+        } else {
+          setOpen("Invalid Credentials");
+        }
+      } catch (response) {}
     },
   });
 
@@ -190,7 +195,7 @@ export default function Login() {
           </div>
         </div>
         <Snackbar
-          open={open}
+          open={!!open}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           autoHideDuration={3000}
           onClose={handleSnackClose}
@@ -200,7 +205,7 @@ export default function Login() {
             severity="error"
             sx={{ width: "100%" }}
           >
-            This is a success message!
+            {open}
           </Alert>
         </Snackbar>
         {/* <Alert severity="error">This is an error message!</Alert> */}
