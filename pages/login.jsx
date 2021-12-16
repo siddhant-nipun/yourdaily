@@ -16,11 +16,13 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { baseurl } from "../utility/auth";
+import { useRouter } from "next/router";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export default function Login() {
+  const router = useRouter();
   //login
 
   //---- snackbar---
@@ -90,7 +92,8 @@ export default function Login() {
         if (result.status === 200) {
           let result2 = await result.json();
           console.log(result2);
-          localStorage.setItem("res", JSON.stringify(result2));
+          localStorage.setItem("token", result2.Authorization);
+          router.push("/dashboard");
         } else {
           setOpen("Invalid Credentials");
         }
