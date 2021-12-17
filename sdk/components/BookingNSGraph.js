@@ -1,6 +1,11 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import { baseurl } from "../../utility/auth";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import styles from "/styles/BookingNSGraph.module.scss";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -87,9 +92,46 @@ export default function BookingNSGraph() {
   };
   return (
     <>
-      <div>
-        my chart
-        <Bar options={options} data={data} />
+      <div className={styles.mainContainer}>
+        <div className={styles.barContainer}>
+          <div className={styles.bookingformWrapper}>
+            <FormControl className={styles.locationSelectorForm}>
+              <InputLabel id="AllLocation">All location</InputLabel>
+              <Select
+                labelId="AllLocation"
+                id="AllLocation"
+                value={location}
+                label="AllLocation"
+                onChange={(event) => {
+                  setLocation(event.target.value);
+                }}
+              >
+                <MenuItem value={1}>Location 1</MenuItem>
+                <MenuItem value={2}>Location 2</MenuItem>
+                <MenuItem value={3}>Location 3</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl className={styles.daysSelectorForm}>
+              <InputLabel id="Days">Days</InputLabel>
+              <Select
+                labelId="Days"
+                id="Days"
+                value={days}
+                label="Days"
+                onChange={(e) => {
+                  setDays(e.target.value);
+                }}
+              >
+                <MenuItem value={14}>Last 14 Days</MenuItem>
+                <MenuItem value={30}>Last 30 Days</MenuItem>
+                <MenuItem value={60}>2 Months</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <div className={styles.barGraph}>
+            <Bar options={options} data={data} />
+          </div>
+        </div>
       </div>
     </>
   );

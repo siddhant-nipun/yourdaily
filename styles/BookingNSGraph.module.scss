@@ -1,0 +1,22 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  .barContainer {
+    width: 1200px;
+    height: 758px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    .bookingformWrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      .locationSelectorForm {
+      }
+      .daysSelectorForm {
+      }
+    }
+  }
+}
