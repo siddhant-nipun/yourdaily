@@ -1,12 +1,11 @@
 import { useState, React, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import styles from "/styles/dashboard.module.scss";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { baseurl } from "../../utility/auth";
+import BookingNSGraph from "../../sdk/components/BookingNSGraph";
 
 export default function ButtonAppBar() {
   const [dashboardData, setdashboardData] = useState();
@@ -136,6 +135,9 @@ export default function ButtonAppBar() {
         </div>
       </div>
       {/* Dashboard card conatiner ends-- */}
+      <div>
+        <BookingNSGraph />
+      </div>
     </div>
   );
 }
