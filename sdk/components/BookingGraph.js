@@ -5,7 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import styles from "/styles/BookingNSGraph.module.scss";
+import styles from "/styles/BookingGraph.module.scss";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,15 +25,15 @@ ChartJS.register(
   Legend
 );
 
-export default function BookingNSGraph() {
-  const [location, setLocation] = useState("");
+export default function BookingGraph(props) {
+  const [location, setLocation] = useState(0);
   const [Bnschart, setBnschart] = useState([]);
-  const [days, setDays] = useState("14");
+  const [days, setDays] = useState(14);
   useEffect(() => {
     (async () => {
       try {
         const response = await fetch(
-          `${baseurl}/api/store-manager/dashboard/nsg/${days}`,
+          `${baseurl}/api/store-manager/dashboard/${props.apiFolder}/${days}`,
           {
             method: "GET",
             headers: {
@@ -48,21 +48,21 @@ export default function BookingNSGraph() {
         console.log(error);
       }
     })();
-  }, [days]);
+  }, [props.apiFolder, days]);
 
-  const { date, now, Scheduled } = useMemo(() => {
+  const { date, now, scheduled } = useMemo(() => {
     return {
       date: Bnschart.map((item) => {
         return format(new Date(item.date), "dd/mm");
       }),
       now: Bnschart.map((item) => {
-        return item.nowOrders;
+        return item[props.key1];
       }),
       scheduled: Bnschart.map((item) => {
-        return item.scheduledOrders;
+        return item[props.key2];
       }),
     };
-  }, [Bnschart]);
+  }, [Bnschart, props.key1, props.key2]);
   const options = {
     response: true,
     plugins: {
@@ -79,13 +79,13 @@ export default function BookingNSGraph() {
     labels: date,
     datasets: [
       {
-        label: "Now",
+        label: `${props.graphvar1}`,
         data: now,
         backgroundColor: "#6AFF6A",
       },
       {
-        label: "Scheduled",
-        data: Scheduled,
+        label: `${props.graphvar2}`,
+        data: scheduled,
         backgroundColor: "#FF8383",
       },
     ],
@@ -94,18 +94,20 @@ export default function BookingNSGraph() {
     <>
       <div className={styles.mainContainer}>
         <div className={styles.barContainer}>
+          <h2>{props.chartHeading}</h2>
           <div className={styles.bookingformWrapper}>
             <FormControl className={styles.locationSelectorForm}>
               <InputLabel id="AllLocation">All location</InputLabel>
               <Select
                 labelId="AllLocation"
                 id="AllLocation"
-                value={location}
+                value={0}
                 label="AllLocation"
                 onChange={(event) => {
                   setLocation(event.target.value);
                 }}
               >
+                <MenuItem value={0}>-Location-</MenuItem>
                 <MenuItem value={1}>Location 1</MenuItem>
                 <MenuItem value={2}>Location 2</MenuItem>
                 <MenuItem value={3}>Location 3</MenuItem>

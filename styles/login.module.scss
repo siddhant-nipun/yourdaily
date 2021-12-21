@@ -1,40 +1,34 @@
-
-.container{
-    display:flex;
-    flex-direction: row;
-    padding: 0 110px 0 165px;
-    justify-content: space-between;
-    .imageContainer{
-        >img{
-            // width:50%;
-            // height: 60%;
-        }
-
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: 0 110px 0 165px;
+  justify-content: space-between;
+ 
+  }
+  .card {
+    align-self: center;
+    background-color: #ffffff;
+    border: 1px solid #7777774d;
+    border-radius: 5px;
+    box-shadow: 12px 9px 27px #7777774d;
+    padding: 18px;
+    .credentials {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .card{
-        align-self: center;
-        background-color: #FFFFFF;
-        border: 1px solid #7777774D;
-        border-radius: 5px;
-        box-shadow: 12px 9px 27px #7777774D;
-        padding: 18px;
-        .credentials{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .loginbtnContainer{
-            margin: 0 0 0 10px;
-        }
-       .loginbutton{
-           color:white;
-           width: 95%;
-       }
-       .forgotpwd{
-           align-self: flex-end;
-           color:#F88A12;
-           font-size: 14px;
-           margin: 10px 0;
-       }
+    .loginbtnContainer {
+      margin: 0 0 0 10px;
     }
+    .loginbutton {
+      color: white;
+      width: 95%;
+    }
+    .forgotpwd {
+      align-self: flex-end;
+      color: #f88a12;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+  }
 }

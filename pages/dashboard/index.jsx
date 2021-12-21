@@ -1,11 +1,9 @@
 import { useState, React, useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import styles from "/styles/dashboard.module.scss";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { baseurl } from "../../utility/auth";
-import BookingNSGraph from "../../sdk/components/BookingNSGraph";
+import BookingGraph from "../../sdk/components/BookingGraph";
+import NavbarDashboard from "../../sdk/components/NavbarDashboard";
 
 export default function ButtonAppBar() {
   const [dashboardData, setdashboardData] = useState();
@@ -93,50 +91,46 @@ export default function ButtonAppBar() {
 
   return (
     <div className={styles.maincontainer}>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <div className={styles.navbar}>
-            <div className={styles.navbarleft}>
-              <div className={styles.ydlogo}>
-                <img src="/assets/ydlogodash.svg" alt="This is a yd logo" />
-              </div>
-              <h3 component="div" sx={{ flexGrow: 1 }}>
-                Dashboard
-              </h3>
-            </div>
-            <div className={styles.navbarright}>
-              <Button color="inherit">
-                <img src="/assets/usericon.svg" alt="user icon" />
-              </Button>
-              <Button color="inherit">
-                <LogoutIcon fontSize="medium" />
-              </Button>
-            </div>
-          </div>
-        </AppBar>
-      </Box>
+      <NavbarDashboard />
       {/* Dashboard cards starts-- */}
-      <div className={styles.firstContainer}>
-        <div className={styles.cardswrapper}>
-          {cardData.map(({ id, heading, desp, digits, footer }) => (
-            <div className={styles.card} key={id.toString()}>
-              <div>
-                <h3>{heading}</h3>
-                {desp && <h5>{desp}</h5>}
-                <h2>{digits}</h2>
+      <div className={styles.container}>
+        <div className={styles.firstContainer}>
+          <div className={styles.cardswrapper}>
+            {cardData.map(({ id, heading, desp, digits, footer }) => (
+              <div className={styles.card} key={id.toString()}>
+                <div>
+                  <h3>{heading}</h3>
+                  {desp && <h5>{desp}</h5>}
+                  <h2>{digits}</h2>
+                </div>
+                {footer && (
+                  <Button className={styles.viewButton} variant="contained">
+                    {footer}
+                  </Button>
+                )}
               </div>
-              {footer && (
-                <Button className={styles.viewButton} variant="contained">
-                  {footer}
-                </Button>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-      {/* Dashboard card conatiner ends-- */}
-      <div>
-        <BookingNSGraph />
+        {/* Dashboard card conatiner ends-- */}
+        <div>
+          <BookingGraph
+            chartHeading={"Accepted and Denied Bookings Graph"}
+            apiFolder={"adg"}
+            graphvar1={"Accepted"}
+            graphvar2={"Denied"}
+            key1={"acceptedOrders"}
+            key2={"declinedOrders"}
+          />
+          <BookingGraph
+            chartHeading={"Bookings (Now vs Scheduled)"}
+            apiFolder={"nsg"}
+            graphvar1={"Now"}
+            graphvar2={"Scheduled"}
+            key1={"nowOrders"}
+            key2={"scheduledOrders"}
+          />
+        </div>
       </div>
     </div>
   );
