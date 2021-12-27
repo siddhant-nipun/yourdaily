@@ -6,7 +6,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
 import styles from "../../../styles/ItemsTable.module.scss";
 import { baseurl } from "../../../utility/auth";
 
@@ -28,13 +27,16 @@ export default function BasicTable() {
   useEffect(() => {
     (async () => {
       try {
-        const fetchData = await fetch(`${baseurl}/api/store-manager/item`, {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: localStorage.getItem("token"),
-          },
-        });
+        const fetchData = await fetch(
+          `${baseurl}/api/store-manager/dashboard/user/details`,
+          {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
         const reponseData = await fetchData.json();
         setData(reponseData);
       } catch (error) {
@@ -55,56 +57,60 @@ export default function BasicTable() {
           <TableHead>
             <TableRow sx={{ " td,  th": { border: 1 } }}>
               <TableCell className={styles.eachHeadCell} align="center">
-                S.No
+                Name
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Image
+                Contact
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                VegetablesName
+                Primary Location
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Base Qty.
+                Total <br /> Orders
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Price <br />
-                (per base Qty)
+                Denied
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                In Stock
+                Cancel
+              </TableCell>
+              <TableCell className={styles.eachHeadCell} align="center">
+                Average <br /> Rating
+              </TableCell>
+              <TableCell className={styles.eachHeadCell} align="center">
+                Flagged
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row, index) => (
+            {data.map((row) => (
               <TableRow key={row.name} sx={{ " td,  th": { border: 1 } }}>
                 {/* <TableCell component="th" scope="row">
                 {row.name}
               </TableCell> */}
-                <TableCell className={styles.eachCell} align="center">
-                  {index + 1}
-                </TableCell>
-                <TableCell className={styles.eachCell} align="center">
-                  <img src={row.itemImageLinks[0]} />
-                </TableCell>
-                <TableCell className={styles.eachNameCell} align="center">
+                <TableCell className={styles.eachOrangeCell} align="center">
                   {row.name}
                 </TableCell>
                 <TableCell className={styles.eachCell} align="center">
-                  {row.baseQuantity}
+                  {row.contact}
                 </TableCell>
                 <TableCell className={styles.eachCell} align="center">
-                  ₹{row.price}
+                  {row.defaultAddress}
+                </TableCell>
+                <TableCell className={styles.eachOrangeCell} align="center">
+                  {row.totalOrders}
+                </TableCell>
+                <TableCell className={styles.eachRedCell} align="center">
+                  {row.deniedOrders}
+                </TableCell>
+                <TableCell className={styles.eachBlueCell} align="center">
+                  {row.canceledOrders}
                 </TableCell>
                 <TableCell className={styles.eachCell} align="center">
-                  {
-                    <Checkbox
-                      // defaultChecked={checked}
-                      checked={row.inStock}
-                      onChange={handleChange}
-                      inputProps={{ "aria-label": "controlled" }}
-                    />
-                  }
+                  {row.avgRating}
+                </TableCell>
+                <TableCell className={styles.eachCell} align="center">
+                  {row.flagCount}
                 </TableCell>
               </TableRow>
             ))}

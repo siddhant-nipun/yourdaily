@@ -15,9 +15,6 @@ export default function ControlBar(props) {
           Back
         </h3>
       </a>
-      <a className={styles.heading} href="#">
-        <h3>{props.heading}</h3>
-      </a>
       <a className={styles.add} href="#">
         <p>+ Add New {props.heading}</p>
       </a>

@@ -4,8 +4,10 @@ import styles from "/styles/dashboard.module.scss";
 import { baseurl } from "../../utility/auth";
 import BookingGraph from "../../sdk/components/BookingGraph";
 import NavbarDashboard from "../../sdk/components/NavbarDashboard";
+import { useRouter } from "next/router";
 
 export default function ButtonAppBar() {
+  const router = useRouter();
   const [dashboardData, setdashboardData] = useState();
 
   useEffect(() => {
@@ -34,36 +36,42 @@ export default function ButtonAppBar() {
       heading: "Total Card Person",
       digits: dashboardData?.cartBoyCount,
       footer: "View Details",
+      link: "/dashboard/details",
     },
     {
       id: 2,
       heading: "Total Delivery Boy",
       digits: dashboardData?.deliveryBoyCount,
       footer: "View Details",
+      link: "/dashboard/details",
     },
     {
       id: 3,
       heading: "Total User",
       digits: dashboardData?.userCount,
       footer: "View Details",
+      link: "/dashboard/details",
     },
     {
       id: 4,
       heading: "Unassigned Orders",
       digits: dashboardData?.unassignedOrders,
       footer: "View Details",
+      link: "/dashboard",
     },
     {
       id: 5,
       heading: "Total Items",
       digits: dashboardData?.totalItems,
       footer: "View Details",
+      link: "/dashboard/items",
     },
     {
       id: 6,
       heading: "Total Active Users",
       desp: "(Past 10 days order)",
       digits: dashboardData?.activeUsers,
+      link: "/dashboard",
     },
     {
       id: 7,
@@ -80,12 +88,14 @@ export default function ButtonAppBar() {
       heading: "Denied/ Disputed order",
       digits: `${dashboardData?.deniedOrder} / ${dashboardData?.disputedOrder}`,
       footer: "View Details",
+      link: "/dashboard",
     },
     {
       id: 10,
       heading: "Schedules order",
       digits: dashboardData?.scheduledOrder,
       footer: "View Details",
+      link: "/dashboard",
     },
   ];
 
@@ -96,7 +106,7 @@ export default function ButtonAppBar() {
       <div className={styles.container}>
         <div className={styles.firstContainer}>
           <div className={styles.cardswrapper}>
-            {cardData.map(({ id, heading, desp, digits, footer }) => (
+            {cardData.map(({ id, heading, desp, digits, footer, link }) => (
               <div className={styles.card} key={id.toString()}>
                 <div>
                   <h3>{heading}</h3>
@@ -104,7 +114,13 @@ export default function ButtonAppBar() {
                   <h2>{digits}</h2>
                 </div>
                 {footer && (
-                  <Button className={styles.viewButton} variant="contained">
+                  <Button
+                    className={styles.viewButton}
+                    variant="contained"
+                    onClick={() => {
+                      router.push(link);
+                    }}
+                  >
                     {footer}
                   </Button>
                 )}

@@ -1,13 +1,13 @@
 import React from "react";
 import ControlBar from "../../sdk/components/ControlBar";
 import NavbarDashboard from "../../sdk/components/NavbarDashboard";
-import TabsNav from "../../sdk/components/TabsNav";
+import TabsNavItems from "../../sdk/components/TabsNavItems";
 export default function items() {
   return (
     <div>
       <NavbarDashboard />
       <ControlBar heading={"Items"} />
-      <TabsNav />
+      <TabsNavItems item1={"Vegetables"} item2={"Fruits"} item3={"Others"} />
     </div>
   );
 }

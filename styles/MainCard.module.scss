@@ -1,0 +1,40 @@
+.wholeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .mainContainer {
+    width: 600px;
+    height: 541px;
+    border: 1px solid #707070;
+    border-radius: 10px;
+    .wrapper {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      .topContainer {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        .topLeft {
+          flex-grow: 1;
+          .dpHolder {
+            width: 156px;
+            height: 156px;
+            border: 1px solid black;
+            border-radius: 90px;
+          }
+        }
+        .topRight {
+          flex-grow: 1;
+        }
+      }
+      .bottomContainer {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

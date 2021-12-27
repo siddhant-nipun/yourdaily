@@ -1,9 +1,34 @@
-.categoriesTable {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  .center {
-    display: flex;
-    justify-content: space-between;
+.mainContainer {
+  .eachHeadCell {
+    background-color: #fff0df;
+    color: #777777;
+  }
+  .eachNameCell {
+    border: 1px solid #777777;
+    color: #f88a12;
+    width: 25rem;
+  }
+  .eachCell {
+    color: #777777;
+    > img {
+      width: 83px;
+      height: 62px;
+    }
+  }
+  .eachOrangeCell {
+    border: 1px solid #777777;
+    color: #f88a12;
+  }
+  .eachRedCell {
+    border: 1px solid #777777;
+    color: #ff0000;
+  }
+  .eachBlueCell {
+    border: 1px solid #777777;
+    color: #4612f8;
+  }
+  .eachGreenCell {
+    border: 1px solid #777777;
+    color: #21f812;
   }
 }

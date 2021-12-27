@@ -4,8 +4,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import styles from "/styles/navbarDashboard.module.scss";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useRouter } from "next/router";
 
 export default function navbarDashboard() {
+  const router = useRouter();
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -24,7 +26,12 @@ export default function navbarDashboard() {
                 <img src="/assets/usericon.svg" alt="user icon" />
               </Button>
               <Button color="inherit">
-                <LogoutIcon fontSize="medium" />
+                <LogoutIcon
+                  fontSize="medium"
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                />
               </Button>
             </div>
           </div>

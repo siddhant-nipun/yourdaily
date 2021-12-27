@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -52,7 +52,7 @@ export default function Totalfruits({ type, onChange }) {
           method: "PUT",
           headers: {
             "Content-type": "application/json",
-            Authorization: localStorage.getItem("JWTsessionToken"),
+            Authorization: localStorage.getItem("token"),
           },
           body: JSON.stringify({
             category: row.categoryID,
