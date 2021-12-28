@@ -85,7 +85,7 @@ export default function CustomizedDialogs(props) {
                 <div className={styles.topContainer}>
                   <div className={styles.topLeft}>
                     <div className={styles.dpHolder}>
-                      <img src="/assets/Rakesh.png" alt="Rakesh" />
+                      <img src="/assets/Rakesh.png" alt="Profile Pic" />
                     </div>
                   </div>
                   <div className={styles.topRight}>
