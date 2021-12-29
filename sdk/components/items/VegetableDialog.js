@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -29,63 +29,111 @@ export default function FormDialog(props) {
   //   setOpen(false);
   // };
 
-  //post request
-  const handleSubmit = () => {
-    (async () => {
-      try {
-        const fetchData = await fetch(`${baseurl}//api/store-manager/item/`, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: localStorage.getItem("token"),
-          },
-          body: JSON.stringify({
-            // "category":1,
-            // "name":"random",
-            // "price":500,
-            // "inStock":true,
-            // "baseQuantity":"1 Unit",
-            // "imageId":52
-            category: "1",
-            name,
-            price: Number(price),
-            inStock: true,
-            baseQuantity: baseQty,
-            imageId: imageId,
-            strikeThroughPrice: Number(mrp),
-          }),
-        });
-        const res = await fetchData.json();
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    setOpen(false);
-  };
-
-  const uploadimage = () => {
-    (async (image) => {
-      try {
-        const formData = new FormData();
-        formData.append("item", image);
-        const response = await fetch(
-          `${baseurl}/api/store-manager/image/item`,
-          {
+  // post request
+  const handleSubmit = React.useCallback(
+    (event) => {
+      console.log("ADD button is working");
+      (async () => {
+        try {
+          const fetchData = await fetch(`${baseurl}//api/store-manager/item/`, {
             method: "POST",
             headers: {
-              "Content-type": "multipart/form-data",
+              "Content-type": "application/json",
               Authorization: localStorage.getItem("token"),
             },
-            body: formData,
-          }
-        );
-        const res = await response.json();
-        setImageId(res.imageId);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  };
+            body: JSON.stringify({
+              category: 1,
+              name,
+              price: Number(price),
+              inStock: true,
+              baseQuantity: baseQty,
+              imageId: imageId,
+              strikeThroughPrice: Number(mrp),
+            }),
+          });
+
+          const res = await fetchData.json();
+        } catch (error) {
+          console.log(error);
+        }
+        setOpen(false);
+      })();
+    },
+    [name, price, baseQty, imageId, mrp]
+  );
+
+  // const handleSubmit = React.useCallback(
+  //   (event) => {
+  //     console.log("ADD button is Working");
+  //     event.preventDefault();
+  //     (async () => {
+  //       try {
+  //         const result = await fetch(`${baseurl}/api/store-manager/item`, {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Authorization: localStorage.getItem("token"),
+  //           },
+  //           body: JSON.stringify({
+  //             category: 1,
+  //             name,
+  //             price: Number(price),
+  //             inStock: true,
+  //             baseQuantity: baseQty,
+  //             imageId: imageId,
+  //             strikeThroughPrice: Number(mrp),
+  //           }),
+  //         });
+  //         const res = await result.json();
+  //         console.log(res);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     })();
+  //   },
+  //   [name, price, baseQty, imageId]
+  // );
+
+  const uplaoding = React.useCallback(async (image) => {
+    try {
+      const formData = new FormData();
+      formData.append("item", image);
+      const response = await fetch(`${baseurl}/api/store-manager/image/item`, {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        body: formData,
+      });
+      const res = await response.json();
+      console.log(res.imageId);
+      setImageId(res.imageId);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  // ) () => {
+  //   (async (image) => {
+  //     try {
+  //       // const formData = new FormData();
+  //       // formData.append("item", image);
+  //       // const response = await fetch(
+  //       //   `${baseurl}/api/store-manager/image/item`,
+  //       //   {
+  //       //     method: "POST",
+  //       //     headers: {
+  //       //       // "Content-type": "multipart/form-data",
+  //       //       Authorization: localStorage.getItem("token"),
+  //       //     },
+  //       //     body: formData,
+  //       //   }
+  //       // );
+  //       // const res = await response.json();
+  //       // setImageId(res.imageId);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   })();
 
   return (
     <form onSubmit={handleSubmit}>
@@ -166,7 +214,7 @@ export default function FormDialog(props) {
                   type="file"
                   name="image"
                   onChange={(e) => {
-                    uploadimage(e.target.value);
+                    uplaoding(e.target.files[0]);
                   }}
                 />
                 {/* <Button
