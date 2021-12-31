@@ -1,33 +1,58 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  padding: 0 110px 0 165px;
-  justify-content: space-between;
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400&display=swap");
+.mainContainer {
+  font-family: "Mulish", sans-serif;
 
-  .card {
-    align-self: center;
-    background-color: #ffffff;
-    border: 1px solid #7777774d;
-    border-radius: 5px;
-    box-shadow: 12px 9px 27px #7777774d;
-    padding: 18px;
-    .credentials {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+  background-image: linear-gradient(#ffecd7, #ffc9c9);
+  width: 100vw;
+  height: 100vh;
+  padding: 10px 50px 10px 120px;
+  .container {
+    display: flex;
+    flex-direction: row;
+    padding: 0 110px 0 165px;
+    justify-content: space-between;
+    .imageContainer {
+      // width: 725px;
+      // height: 512px;
+      // background: transparent url("../public/assets/Illustrator 1.png") 0% 0%
+      //   no-repeat padding-box;
+      opacity: 0.7;
+      // > img {
+      //   visibility: hidden;
+      // }
     }
-    .loginbtnContainer {
-      margin: 0 0 0 10px;
-    }
-    .loginbutton {
-      color: white;
-      width: 95%;
-    }
-    .forgotpwd {
-      align-self: flex-end;
-      color: #f88a12;
-      font-size: 14px;
-      margin: 10px 0;
+
+    .card {
+      align-self: center;
+      background-color: #ffffff;
+      border: 1px solid #7777774d;
+      border-radius: 10px;
+      box-shadow: 12px 9px 27px #7777774d;
+      padding: 30px 16px;
+      .pleaseLogin {
+        padding-top: 5px;
+        color: #00000060;
+      }
+      .credentials {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 18px;
+      }
+      .loginbtnContainer {
+        margin: 0 0 0 10px;
+      }
+      .loginbutton {
+        color: white;
+        background-image: linear-gradient(#f88a12, #cd2d05);
+        width: 95%;
+      }
+      .forgotpwd {
+        align-self: flex-end;
+        color: #f88a12;
+        font-size: 14px;
+        margin: 10px 0;
+      }
     }
   }
 }

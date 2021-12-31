@@ -99,6 +99,7 @@ export default function BookingGraph(props) {
             <FormControl className={styles.locationSelectorForm}>
               <InputLabel id="AllLocation">All location</InputLabel>
               <Select
+                className={styles.locationValue}
                 labelId="AllLocation"
                 id="AllLocation"
                 value={0}
@@ -107,7 +108,7 @@ export default function BookingGraph(props) {
                   setLocation(event.target.value);
                 }}
               >
-                <MenuItem value={0}>-Location-</MenuItem>
+                <MenuItem value={0}>--Location--</MenuItem>
                 <MenuItem value={1}>Location 1</MenuItem>
                 <MenuItem value={2}>Location 2</MenuItem>
                 <MenuItem value={3}>Location 3</MenuItem>
@@ -116,6 +117,7 @@ export default function BookingGraph(props) {
             <FormControl className={styles.daysSelectorForm}>
               <InputLabel id="Days">Days</InputLabel>
               <Select
+                className={styles.locationValue}
                 labelId="Days"
                 id="Days"
                 value={days}

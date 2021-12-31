@@ -8,9 +8,12 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import styles from "../../../styles/VegetableDialog.module.scss";
 import Input from "@mui/material/Input";
+import { useRouter } from "next/router";
 import { baseurl } from "../../../utility/auth";
 
-export default function FormDialog(props) {
+export default function FormDialog({ renderFunc }) {
+  const router = useRouter();
+
   const [name, setname] = useState("");
   const [price, setprice] = useState(Number(""));
   const [baseQty, setbaseQty] = useState("");
@@ -25,17 +28,15 @@ export default function FormDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  // const handleSubmit = () => {
-  //   setOpen(false);
-  // };
 
   // post request
   const handleSubmit = React.useCallback(
     (event) => {
-      console.log("ADD button is working");
+      console.log("ADD is working");
+      // event.preventDefault();
       (async () => {
         try {
-          const fetchData = await fetch(`${baseurl}//api/store-manager/item/`, {
+          const fetchData = await fetch(`${baseurl}/api/store-manager/item/`, {
             method: "POST",
             headers: {
               "Content-type": "application/json",
@@ -51,48 +52,26 @@ export default function FormDialog(props) {
               strikeThroughPrice: Number(mrp),
             }),
           });
-
           const res = await fetchData.json();
+          console.log(res);
+          // console.log(fetchData);
+          if (fetchData.status === 201) {
+            console.log("hi");
+            // debugger;
+            renderFunc();
+          }
         } catch (error) {
           console.log(error);
         }
         setOpen(false);
+        // router.reload();
       })();
     },
-    [name, price, baseQty, imageId, mrp]
+    [name, price, baseQty, imageId, mrp, renderFunc]
   );
-
-  // const handleSubmit = React.useCallback(
-  //   (event) => {
-  //     console.log("ADD button is Working");
-  //     event.preventDefault();
-  //     (async () => {
-  //       try {
-  //         const result = await fetch(`${baseurl}/api/store-manager/item`, {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: localStorage.getItem("token"),
-  //           },
-  //           body: JSON.stringify({
-  //             category: 1,
-  //             name,
-  //             price: Number(price),
-  //             inStock: true,
-  //             baseQuantity: baseQty,
-  //             imageId: imageId,
-  //             strikeThroughPrice: Number(mrp),
-  //           }),
-  //         });
-  //         const res = await result.json();
-  //         console.log(res);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     })();
-  //   },
-  //   [name, price, baseQty, imageId]
-  // );
+  // useEffect(() => {
+  //   renderFunc;
+  // }, []);
 
   const uplaoding = React.useCallback(async (image) => {
     try {
@@ -112,28 +91,6 @@ export default function FormDialog(props) {
       console.log(error);
     }
   }, []);
-  // ) () => {
-  //   (async (image) => {
-  //     try {
-  //       // const formData = new FormData();
-  //       // formData.append("item", image);
-  //       // const response = await fetch(
-  //       //   `${baseurl}/api/store-manager/image/item`,
-  //       //   {
-  //       //     method: "POST",
-  //       //     headers: {
-  //       //       // "Content-type": "multipart/form-data",
-  //       //       Authorization: localStorage.getItem("token"),
-  //       //     },
-  //       //     body: formData,
-  //       //   }
-  //       // );
-  //       // const res = await response.json();
-  //       // setImageId(res.imageId);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   })();
 
   return (
     <form onSubmit={handleSubmit}>

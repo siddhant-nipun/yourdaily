@@ -57,7 +57,7 @@ export default function ButtonAppBar() {
       heading: "Unassigned Orders",
       digits: dashboardData?.unassignedOrders,
       footer: "View Details",
-      link: "/dashboard",
+      link: "/dashboard/orders",
     },
     {
       id: 5,
@@ -71,7 +71,7 @@ export default function ButtonAppBar() {
       heading: "Total Active Users",
       desp: "(Past 10 days order)",
       digits: dashboardData?.activeUsers,
-      link: "/dashboard",
+      link: "/dashboard/orders",
     },
     {
       id: 7,
@@ -81,6 +81,7 @@ export default function ButtonAppBar() {
     {
       id: 8,
       heading: "Past Week Bookings",
+      desp: " ",
       digits: dashboardData?.bookingForLastWeek,
     },
     {
@@ -88,14 +89,14 @@ export default function ButtonAppBar() {
       heading: "Denied/ Disputed order",
       digits: `${dashboardData?.deniedOrder} / ${dashboardData?.disputedOrder}`,
       footer: "View Details",
-      link: "/dashboard",
+      link: "/dashboard/orders",
     },
     {
       id: 10,
-      heading: "Schedules order",
+      heading: "Scheduled order",
       digits: dashboardData?.scheduledOrder,
       footer: "View Details",
-      link: "/dashboard",
+      link: "/dashboard/orders",
     },
   ];
 
@@ -108,10 +109,16 @@ export default function ButtonAppBar() {
           <div className={styles.cardswrapper}>
             {cardData.map(({ id, heading, desp, digits, footer, link }) => (
               <div className={styles.card} key={id.toString()}>
-                <div>
+                <div className={styles.cardElements}>
                   <h3>{heading}</h3>
                   {desp && <h5>{desp}</h5>}
-                  <h2>{digits}</h2>
+                  {heading === "Total User" ? (
+                    <h2 className={styles.blueDigits}>{digits}</h2>
+                  ) : heading === "Total Active Users" ? (
+                    <h2 className={styles.greenDigits}>{digits}</h2>
+                  ) : (
+                    <h2 className={styles.normalDigits}>{digits}</h2>
+                  )}
                 </div>
                 {footer && (
                   <Button

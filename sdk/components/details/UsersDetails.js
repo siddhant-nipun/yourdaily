@@ -57,34 +57,38 @@ export default function BasicTable() {
           <TableHead>
             <TableRow sx={{ " td,  th": { border: 1 } }}>
               <TableCell className={styles.eachHeadCell} align="center">
-                Name
+                <h4>Name</h4>
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Contact
+                <h4>Contact</h4>
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Primary Location
+                <h4>Primary Location</h4>
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Total <br /> Orders
+                <h4>
+                  Total <br /> Orders
+                </h4>
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Denied
+                <h4>Denied</h4>
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Cancel
+                <h4>Cancel</h4>
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Average <br /> Rating
+                <h4>
+                  Average <br /> Rating
+                </h4>
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                Flagged
+                <h4>Flagged</h4>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <TableRow key={row.name} sx={{ " td,  th": { border: 1 } }}>
+              <TableRow key={row.id} sx={{ " td,  th": { border: 1 } }}>
                 {/* <TableCell component="th" scope="row">
                 {row.name}
               </TableCell> */}

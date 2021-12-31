@@ -23,10 +23,8 @@ export default function ControlBar(props) {
           <h3>{props.heading}</h3>
         </a>
         <a className={styles.add} href="#">
-          <Button>
-            {/* <p>+ Add New {props.heading}</p> */}
-            <VegetableDialog />
-          </Button>
+          {/* <p>+ Add New {props.heading}</p> */}
+          {props.heading && <VegetableDialog />}
         </a>
       </div>
     </>

@@ -1,0 +1,18 @@
+.wholeContainer {
+  // display: flex;
+  // justify-content: center;
+  .boxContainer {
+    display: flex;
+    justify-content: center;
+    .tablistContainer {
+      display: flex;
+      .tabLabel:active {
+        border: 1px solid #f88a12;
+      }
+    }
+  }
+  .tabpanelContainer {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import styles from "../../../styles/ItemsTable.module.scss";
 import { baseurl } from "../../../utility/auth";
 import Button from "@mui/material/Button";
-import CartpersonDialog from "./CartpersonDialog";
+// import CartpersonDialog from "./CartpersonDialog";
 import { RowingRounded } from "@mui/icons-material";
 import { format } from "date-fns";
 
@@ -32,7 +32,7 @@ export default function BasicTable() {
     (async () => {
       try {
         const fetchData = await fetch(
-          `${baseurl}/api/store-manager/dashboard/staff/cart-boy`,
+          `${baseurl}/api/store-manager/dashboard/order/disputed`,
           {
             method: "GET",
             headers: {
@@ -54,12 +54,12 @@ export default function BasicTable() {
     data: null,
   });
 
-  const handleDialog = (item) => {
-    setdialog({
-      open: true,
-      data: item,
-    });
-  };
+  // const handleDialog = (item) => {
+  //   setdialog({
+  //     open: true,
+  //     data: item,
+  //   });
+  // };
 
   const [checked, setChecked] = useState(true);
 
@@ -73,39 +73,25 @@ export default function BasicTable() {
           <TableHead>
             <TableRow sx={{ " td,  th": { border: 1 } }}>
               <TableCell className={styles.eachHeadCell} align="center">
-                <h3>Name</h3>
+                Name
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                <h3>Contact</h3>
+                Order ID
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                <h3>
-                  Registration <br /> Date
-                </h3>
+                User Address
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                <h3>
-                  Total <br /> Orders
-                </h3>
+                Date & Time
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                <h3>Denied</h3>
+                Contact
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                <h3>Cancel</h3>
+                Cancel
               </TableCell>
               <TableCell className={styles.eachHeadCell} align="center">
-                <h3>
-                  Total <br /> Bussiness
-                </h3>
-              </TableCell>
-              <TableCell className={styles.eachHeadCell} align="center">
-                <h3>
-                  Average <br /> Rating
-                </h3>
-              </TableCell>
-              <TableCell className={styles.eachHeadCell} align="center">
-                <h3>Flagged</h3>
+                Action
               </TableCell>
             </TableRow>
           </TableHead>
@@ -154,13 +140,13 @@ export default function BasicTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <CartpersonDialog
+      {/* <CartpersonDialog
         dialogState={dialog.open}
         row={dialog.data}
         onClose={() => {
           setdialog({ open: false, data: null });
         }}
-      />
+      /> */}
     </div>
   );
 }

@@ -11,15 +11,26 @@
     border: 1px solid gray;
     border-radius: 10px;
     padding: 40px;
+    > h2 {
+      padding-bottom: 12px;
+    }
     .bookingformWrapper {
       display: flex;
       flex-direction: row;
       justify-content: center;
       .locationSelectorForm {
         padding: 10px;
+        color: #777777;
+        .locationValue {
+          color: #777777;
+        }
       }
       .daysSelectorForm {
         padding: 10px;
+        color: #777777;
+        .locationValue {
+          color: #777777;
+        }
       }
     }
   }

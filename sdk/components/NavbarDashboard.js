@@ -17,7 +17,13 @@ export default function navbarDashboard() {
               <div className={styles.ydlogo}>
                 <img src="/assets/ydlogodash.svg" alt="This is a yd logo" />
               </div>
-              <h3 component="div" sx={{ flexGrow: 1 }}>
+              <h3
+                component="div"
+                sx={{ flexGrow: 1 }}
+                onClick={() => {
+                  router.push("/dashboard");
+                }}
+              >
                 Dashboard
               </h3>
             </div>

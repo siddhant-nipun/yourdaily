@@ -115,7 +115,9 @@ export default function Login() {
             <div sx={{ minWidth: 275 }}>
               <div>
                 <h2>LOGIN</h2>
-                <p>Please login to your account</p>
+                <p className={styles.pleaseLogin}>
+                  Please login to your account
+                </p>
               </div>
               <Box
                 sx={{
